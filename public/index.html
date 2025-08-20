@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Start</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            background-color: #f0f2f5; /* Background for areas outside the main game area */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            overflow: hidden; /* Prevent scrolling if content overflows */
+            position: relative; /* Allows absolute positioning of child elements relative to body */
+        }
+        /* Custom styles for selected weapon button */
+        .weapon-button.selected {
+            border: 3px solid #3b82f6; /* Blue border for selected */
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); /* Glowing effect */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main game container: This div defines the visible game area.
+         It's positioned absolutely to control its exact placement and size. -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[calc(100vh-2rem)] bg-[rgba(0,203,253,1.00)] rounded-xl shadow-2xl overflow-hidden flex flex-col items-center justify-center">
+        <!-- Canvas element: Positioned absolutely to fill its parent (the main game container). -->
+        <canvas id="gameCanvas" class="absolute inset-0 w-full h-full"></canvas>
+
+        <!-- Content to be displayed over the canvas: weapon selection and username login -->
+        <div id ="weaponMenu" class="relative flex flex-col items-center justify-center w-full h-full px-4 pb-4 space-y-8 z-10">
+            <!-- Weapon Selection Section -->
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 select-none">Choose Your Weapon</h2>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                    <!-- Hammer Button -->
+                    <button id="hammerBtn" class="weapon-button bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        <img src="https://placehold.co/120x120/EBF8FF/2B6CB0?text=Hammer" alt="Hammer" class="w-32 h-32 object-contain rounded-lg">
+                    </button>
+                    <!-- Sword Button -->
+                    <button id="swordBtn" class="weapon-button bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        <img src="https://placehold.co/120x120/EBF8FF/2B6CB0?text=Sword" alt="Sword" class="w-32 h-32 object-contain rounded-lg">
+                    </button>
+                    <!-- Axe Button -->
+                    <button id="axeBtn" class="weapon-button bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        <img src="https://placehold.co/120x120/EBF8FF/2B6CB0?text=Axe" alt="Axe" class="w-32 h-32 object-contain rounded-lg">
+                    </button>
+                </div>
+            </div>
+
+            <!-- Username Login Section -->
+            <div id="startMenu" class="bg-white max-w-md w-full p-6 text-center rounded-xl shadow-2xl">
+                <label for="username" class="block text-xl font-semibold text-gray-800 mb-3 select-none">
+                    Enter Username
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Your name"
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-6 focus:outline-none focus:ring-3 focus:ring-blue-400 text-lg"
+                />
+                <div>
+                    <button id="startGameBtn" class="bg-blue-600 text-white w-full py-3 rounded-full font-bold text-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg">
+                        Start Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message box placeholder for custom messages -->
+    <div id="messageBox" class="fixed top-0 left-1/2 -translate-x-1/2 mt-4 p-4 rounded-lg shadow-lg text-white font-bold transition-transform transform -translate-y-full opacity-0 z-50"></div>
+
+    <!-- Scripts -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
+      xintegrity="sha512-kVlGhj2qFy+KBCFuvjBJTGUMxbdqJKs4yK2jh0e0VPhWUPiPC87bzm4THmaaIee3Oj7j6sDpTTgm2EPPiESqBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <script type="module" src="./js/client.js"></script>
+</body>
+</html>
